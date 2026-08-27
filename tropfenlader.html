@@ -1,77 +1,26 @@
 <title>Tropfen-Lader</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* AquaMind is a fixed dark ("Nocturne") design system with no light
-     variant by product decision — this page commits to that same single
-     dark world rather than deriving an adaptive light theme, but still
-     paints every color explicitly from tokens so it holds on any host. */
   :root {
     --bg: #161826;
     --bg-glow: #1b1e30;
-    --surface: #232532;
-    --surface-raised: #292c3b;
-    --text: #e9e9ed;
-    --text-muted: rgba(233, 233, 237, 0.62);
-    --text-faint: rgba(233, 233, 237, 0.38);
     --accent: #9184d9;
-    --accent-soft: #a7a1db;
     --accent-wash: rgba(145, 132, 217, 0.14);
-    --divider: rgba(233, 233, 237, 0.16);
-    --radius-md: 8px;
-    --radius-lg: 14px;
-    --font-heading: "Inter", -apple-system, "Segoe UI", sans-serif;
-    --font-body: "Inter", -apple-system, "Segoe UI", sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   }
 
   * { box-sizing: border-box; }
 
-  body {
+  html, body {
     margin: 0;
-    min-height: 100vh;
+    height: 100%;
+  }
+
+  body {
     background:
       radial-gradient(ellipse 640px 420px at 50% 12%, var(--bg-glow) 0%, transparent 70%),
       var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 48px 20px;
-  }
-
-  .page {
-    width: 100%;
-    max-width: 420px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 22px;
-  }
-
-  .eyebrow {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent-soft);
-  }
-
-  /* ---- Stage: the loader card ---- */
-
-  .stage {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--divider);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.65);
-    padding: 56px 24px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
   }
 
   .loader {
@@ -113,104 +62,6 @@
     filter: drop-shadow(0 0 6px rgba(145, 132, 217, 0.45));
   }
 
-  .label {
-    font-family: var(--font-heading);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-muted);
-    display: flex;
-    align-items: baseline;
-    gap: 2px;
-  }
-  .dots span {
-    animation: dot-fade 1.4s ease-in-out infinite;
-    opacity: 0.2;
-  }
-  .dots span:nth-child(2) { animation-delay: 0.2s; }
-  .dots span:nth-child(3) { animation-delay: 0.4s; }
-
-  .caption {
-    max-width: 34ch;
-    text-align: center;
-    font-size: 13px;
-    line-height: 1.55;
-    color: var(--text-faint);
-  }
-
-  /* ---- Code panel ---- */
-
-  .code-toggle {
-    appearance: none;
-    background: transparent;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    font-family: var(--font-heading);
-    font-size: 13px;
-    font-weight: 500;
-    border-radius: var(--radius-md);
-    padding: 9px 16px;
-    cursor: pointer;
-  }
-  .code-toggle:hover { background: var(--accent-wash); }
-  .code-toggle:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
-
-  .code-panel {
-    width: 100%;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.35s ease;
-  }
-  .code-panel.open { max-height: 600px; }
-
-  .code-card {
-    width: 100%;
-    background: var(--surface-raised);
-    border: 1px solid var(--divider);
-    border-radius: var(--radius-md);
-    margin-top: 14px;
-    overflow: hidden;
-  }
-  .code-card-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    border-bottom: 1px solid var(--divider);
-  }
-  .code-card-head span {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    color: var(--text-faint);
-  }
-  .copy-btn {
-    appearance: none;
-    background: transparent;
-    border: none;
-    color: var(--accent-soft);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    cursor: pointer;
-    padding: 4px 6px;
-    border-radius: 4px;
-  }
-  .copy-btn:hover { background: var(--accent-wash); color: var(--accent); }
-
-  pre.code-block {
-    margin: 0;
-    padding: 14px 16px 18px;
-    overflow-x: auto;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    line-height: 1.6;
-    color: var(--text-muted);
-  }
-  pre.code-block .tag { color: var(--accent-soft); }
-  pre.code-block .attr { color: #c9c4ea; }
-  pre.code-block .str { color: #8fd6c4; }
-
-  /* ---- Motion ---- */
-
   @keyframes bob {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
@@ -227,118 +78,40 @@
     from { transform: translateX(0); }
     to { transform: translateX(-24px); }
   }
-  @keyframes dot-fade {
-    0%, 80%, 100% { opacity: 0.2; }
-    40% { opacity: 1; }
-  }
 
   @media (prefers-reduced-motion: reduce) {
-    .loader, .ping, .wave-group, .wave-back, .wave-front, .dots span {
+    .loader, .ping, .wave-group, .wave-back, .wave-front {
       animation: none !important;
     }
     .wave-group { transform: translateY(3px); }
     .ping { opacity: 0.18; }
-    .dots span { opacity: 0.6; }
   }
 </style>
 
-<div class="page">
-  <p class="eyebrow">AquaMind · Wartendarstellung</p>
+<div class="loader" role="status" aria-label="Lädt">
+  <div class="ping"></div>
+  <div class="ping ping-2"></div>
 
-  <div class="stage">
-    <div class="loader" role="status" aria-label="Lädt">
-      <div class="ping"></div>
-      <div class="ping ping-2"></div>
+  <svg class="droplet-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <clipPath id="dropletClip">
+        <path d="M12 2C12 2 5 11 5 15.5C5 19.09 8.13 22 12 22C15.87 22 19 19.09 19 15.5C19 11 12 2 12 2Z"/>
+      </clipPath>
+    </defs>
 
-      <svg class="droplet-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <clipPath id="dropletClip">
-            <path d="M12 2C12 2 5 11 5 15.5C5 19.09 8.13 22 12 22C15.87 22 19 19.09 19 15.5C19 11 12 2 12 2Z"/>
-          </clipPath>
-        </defs>
+    <path class="wave-base" clip-path="url(#dropletClip)"
+          d="M0 2 L24 2 L24 22 L0 22 Z"/>
 
-        <path class="wave-base" clip-path="url(#dropletClip)"
-              d="M0 2 L24 2 L24 22 L0 22 Z"/>
+    <g clip-path="url(#dropletClip)">
+      <g class="wave-group">
+        <path class="wave wave-back"
+              d="M0,4 C4,1.5 8,1.5 12,4 C16,6.5 20,6.5 24,4 C28,1.5 32,1.5 36,4 C40,6.5 44,6.5 48,4 L48,26 L0,26 Z"/>
+        <path class="wave wave-front"
+              d="M0,5 C4,2.5 8,2.5 12,5 C16,7.5 20,7.5 24,5 C28,2.5 32,2.5 36,5 C40,7.5 44,7.5 48,5 L48,26 L0,26 Z"/>
+      </g>
+    </g>
 
-        <g clip-path="url(#dropletClip)">
-          <g class="wave-group">
-            <path class="wave wave-back"
-                  d="M0,4 C4,1.5 8,1.5 12,4 C16,6.5 20,6.5 24,4 C28,1.5 32,1.5 36,4 C40,6.5 44,6.5 48,4 L48,26 L0,26 Z"/>
-            <path class="wave wave-front"
-                  d="M0,5 C4,2.5 8,2.5 12,5 C16,7.5 20,7.5 24,5 C28,2.5 32,2.5 36,5 C40,7.5 44,7.5 48,5 L48,26 L0,26 Z"/>
-          </g>
-        </g>
-
-        <path class="droplet-outline"
-              d="M12 2C12 2 5 11 5 15.5C5 19.09 8.13 22 12 22C15.87 22 19 19.09 19 15.5C19 11 12 2 12 2Z"/>
-      </svg>
-    </div>
-
-    <p class="label">Einen Moment<span class="dots"><span>.</span><span>.</span><span>.</span></span></p>
-  </div>
-
-  <p class="caption">Eine ruhige Wartendarstellung im Nocturne-Look von AquaMind: der Tropfen füllt sich und läuft wieder leer, während im Hintergrund gewartet wird.</p>
-
-  <button class="code-toggle" id="codeToggle" type="button" aria-expanded="false" aria-controls="codePanel">Code anzeigen</button>
-
-  <div class="code-panel" id="codePanel">
-    <div class="code-card">
-      <div class="code-card-head">
-        <span>droplet-loader.html</span>
-        <button class="copy-btn" id="copyBtn" type="button">Kopieren</button>
-      </div>
-      <pre class="code-block" id="codeBlock"><code>&lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"loader"</span> <span class="attr">role</span>=<span class="str">"status"</span> <span class="attr">aria-label</span>=<span class="str">"Lädt"</span>&gt;
-  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"ping"</span>&gt;&lt;/<span class="tag">div</span>&gt;
-  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="str">"ping ping-2"</span>&gt;&lt;/<span class="tag">div</span>&gt;
-  &lt;<span class="tag">svg</span> <span class="attr">class</span>=<span class="str">"droplet-svg"</span> <span class="attr">viewBox</span>=<span class="str">"0 0 24 24"</span>&gt;
-    &lt;<span class="tag">clipPath</span> <span class="attr">id</span>=<span class="str">"dropletClip"</span>&gt;
-      &lt;<span class="tag">path</span> <span class="attr">d</span>=<span class="str">"M12 2C12 2 5 11 5 15.5C5 19.09 8.13 22 12 22C15.87 22 19 19.09 19 15.5C19 11 12 2 12 2Z"</span>/&gt;
-    &lt;/<span class="tag">clipPath</span>&gt;
-    &lt;<span class="tag">g</span> <span class="attr">clip-path</span>=<span class="str">"url(#dropletClip)"</span>&gt;
-      &lt;<span class="tag">g</span> <span class="attr">class</span>=<span class="str">"wave-group"</span>&gt;
-        &lt;<span class="tag">path</span> <span class="attr">class</span>=<span class="str">"wave wave-back"</span> <span class="attr">d</span>=<span class="str">"M0,4 C4,1.5 8,1.5 12,4 ... L48,26 L0,26 Z"</span>/&gt;
-        &lt;<span class="tag">path</span> <span class="attr">class</span>=<span class="str">"wave wave-front"</span> <span class="attr">d</span>=<span class="str">"M0,5 C4,2.5 8,2.5 12,5 ... L48,26 L0,26 Z"</span>/&gt;
-      &lt;/<span class="tag">g</span>&gt;
-    &lt;/<span class="tag">g</span>&gt;
-    &lt;<span class="tag">path</span> <span class="attr">class</span>=<span class="str">"droplet-outline"</span> <span class="attr">d</span>=<span class="str">"M12 2C12 2 5 11 5 15.5 ... Z"</span>/&gt;
-  &lt;/<span class="tag">svg</span>&gt;
-&lt;/<span class="tag">div</span>&gt;
-
-<span class="attr">/* Kernbewegungen */</span>
-.loader     { animation: bob 3.2s ease-in-out infinite; }
-.wave-group { animation: fill-level 7s ease-in-out infinite alternate; }
-.wave-back  { animation: drift 6s linear infinite; }
-.wave-front { animation: drift 4s linear infinite reverse; }
-.ping       { animation: ping 3.2s ease-out infinite; }</code></pre>
-    </div>
-  </div>
+    <path class="droplet-outline"
+          d="M12 2C12 2 5 11 5 15.5C5 19.09 8.13 22 12 22C15.87 22 19 19.09 19 15.5C19 11 12 2 12 2Z"/>
+  </svg>
 </div>
-
-<script>
-  (function () {
-    var toggle = document.getElementById('codeToggle');
-    var panel = document.getElementById('codePanel');
-    var copyBtn = document.getElementById('copyBtn');
-    var codeBlock = document.getElementById('codeBlock');
-
-    toggle.addEventListener('click', function () {
-      var open = panel.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.textContent = open ? 'Code ausblenden' : 'Code anzeigen';
-    });
-
-    copyBtn.addEventListener('click', function () {
-      var text = codeBlock.innerText;
-      var done = function () {
-        var original = copyBtn.textContent;
-        copyBtn.textContent = 'Kopiert!';
-        setTimeout(function () { copyBtn.textContent = original; }, 1500);
-      };
-      try {
-        navigator.clipboard.writeText(text).then(done, done);
-      } catch (e) {
-        done();
-      }
-    });
-  })();
-</script>
